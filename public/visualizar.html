@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Visualizar</title>
+    
+    <script type = "text/javascript" src="/socket.io/socket.io.js"></script>
+  </head>
+  <body>
+    <img id="play" src="" alt="">
+    <div id="logger"></div>
+
+    <script>
+      var socket = io();
+      var i = 0;
+      socket.on('stream',function(image){
+        //console.log(i++);
+        var img = document.getElementById("play");
+        img.src = image;
+      });
+    </script>
+  </body>
+</html>

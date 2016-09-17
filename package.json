@@ -1,0 +1,23 @@
+{
+  "name" : "Wcan-Live",
+  "version": "0.0.1",
+  "description": "",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "engines": {
+    "node": "~4.2.1",
+    "npm": "~2.2.0"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies":{
+    "socket.io": "*",
+    "express": "*",
+    "log":"*"
+  },
+  "devDependencies": {
+    "nodemon": "^1.10.2"
+  }
+}
