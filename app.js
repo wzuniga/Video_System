@@ -8,6 +8,8 @@ var io = require('socket.io')(http);
 
 var port = process.env.PORT || 3000;
 
+var messages = [];
+
 app.use(express.static(__dirname + "/public"));
 
 app.get('/',function(req, res){
@@ -15,9 +17,18 @@ app.get('/',function(req, res){
 });
 var i = 0;
 io.on('connection', function(socket){
+
+  io.sockets.emit('messages', messages);
+  
   socket.on('stream', function(image){
     //console.log(i++);
     io.sockets.emit('stream',image);
+  });
+
+  socket.on('new-message', function(data) {
+    messages.push(data);
+
+    io.sockets.emit('messages', messages);
   });
 });
 

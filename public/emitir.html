@@ -11,66 +11,70 @@
   <script type = "text/javascript" src="/socket.io/socket.io.js"></script>
 </head>
 <body ng-app="myApp" ng-controller="myCtrl">
-  <div class="row">
-    <div class="">
-      <video id="video" src="" style="width:680px; height:320px;" autoplay="true"></video>
 
-      <canvas style="display:none;" id="preview"></canvas>
-      <div id="chat">
-        <div class="external">Mensaje de fuera</div>
-        <div class="internal">Mensaje MIO</div>
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">Sistema de video</a>
       </div>
-      <div id="logger"></div>
-
-
-      <script>
-      var app = angular.module('myApp', []);
-      app.controller('myCtrl', function($scope) {
-        var canvas = document.getElementById("preview");
-        var context = canvas.getContext("2d");
-
-        canvas.width = 800;
-        canvas.height = 600;
-
-        context.width = canvas.width;
-        context.height = canvas.height;
-
-        var video = document.getElementById("video");
-
-        var socket = io();
-
-        function logger(msg){
-          //document.getElementById('logger').  text(msg);
-        }
-
-        function loadCam(stream){
-          video.src = window.URL.createObjectURL(stream);
-          logger("Camara cargada");
-        }
-
-        function failCam() {
-          logger("camara no conectada!");
-        }
-
-        function viewVideo(video, context) {
-          context.drawImage(video,0,0,context.width,context.height);
-          socket.emit('stream',canvas.toDataURL('image/webp'));
-        }
-        var i = 0;
-
-        //$(function() {
-        navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
-        if(navigator.getUserMedia){
-          //que usaremos
-          navigator.getUserMedia({video : true},loadCam,failCam);
-        }
-        setInterval(function(){
-          viewVideo(video, context);
-          //console.log(i++);
-        },1);
-        //});
-      });
-      </script>
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/emitir.html">Emitir</a></li>
+        <li><a href="/visualizar.html">Visualizar</a></li>
+      </ul>
     </div>
-  </body>
-  </html>
+  </nav>
+
+  <div class="container">
+    <div class="row">
+        <video id="video" src="" style="width:780px; height:420px;" autoplay="true"></video>
+
+        <canvas style="display:none;" id="preview"></canvas>
+    </div>
+  </div>
+  <script>
+  var app = angular.module('myApp', []);
+  app.controller('myCtrl', function($scope) {
+    var canvas = document.getElementById("preview");
+    var context = canvas.getContext("2d");
+
+    canvas.width = 800;
+    canvas.height = 600;
+
+    context.width = canvas.width;
+    context.height = canvas.height;
+
+    var video = document.getElementById("video");
+
+    var socket = io();
+
+    function logger(msg){
+      //document.getElementById('logger').  text(msg);
+    }
+
+    function loadCam(stream){
+      video.src = window.URL.createObjectURL(stream);
+      logger("Camara cargada");
+    }
+
+    function failCam() {
+      logger("camara no conectada!");
+    }
+
+    function viewVideo(video, context) {
+      context.drawImage(video,0,0,context.width,context.height);
+      socket.emit('stream',canvas.toDataURL('image/webp'));
+    }
+    var i = 0;
+
+    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
+    if(navigator.getUserMedia){
+      navigator.getUserMedia({video : true},loadCam,failCam);
+    }
+    setInterval(function(){
+      viewVideo(video, context);
+    },1);
+  });
+  </script>
+</div>
+</body>
+</html>
