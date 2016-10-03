@@ -1,5 +1,5 @@
 {
-  "name" : "Wcan-Live",
+  "name": "Wcan-Live",
   "version": "0.0.1",
   "description": "",
   "scripts": {
@@ -12,10 +12,11 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies":{
-    "socket.io": "*",
+  "dependencies": {
     "express": "*",
-    "log":"*"
+    "log": "*",
+    "mongoose": "^4.6.2",
+    "socket.io": "*"
   },
   "devDependencies": {
     "nodemon": "^1.10.2"
