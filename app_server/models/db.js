@@ -1,11 +1,13 @@
 var mongoose = require( 'mongoose' );
 
 var dbURI = 'mongodb://localhost/video_system';
-mongoose.connect(dbURI);
 
 if (process.env.NODE_ENV === 'production') {
   dbURI = process.env.MONGOLAB_URI;
 }
+
+mongoose.connect(dbURI);
+
 
 /*
 * Mongoose connection Events
