@@ -1,5 +1,4 @@
 var mongoose = require( 'mongoose' );
-var gracefulShutdown;
 
 var dbURI = 'mongodb://localhost/video_system';
 mongoose.connect(dbURI);
