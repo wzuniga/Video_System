@@ -39,8 +39,8 @@ var videoSchema = new mongoose.Schema({
         type: Date,
         "default": Date.now
     },
-    user: userSchema,
-    category: categorySchema,
+    user: mongoose.Schema.Types.ObjectId,
+    category: mongoose.Schema.Types.ObjectId,
     comments: [commentSchema]
 });
 
