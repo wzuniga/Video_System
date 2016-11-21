@@ -41,3 +41,26 @@ module.exports.videoById = function (req, res) {
     });
   }
 };
+
+/*
+* Create a video
+*/
+module.exports.addVideo = function(req, res){
+  if(req.body){
+    Vid.create({
+      name: req.body.name,
+      description: req.body.description,
+      user: req.body.user,
+    }, function(err, body){
+      if(err){
+        sendJSONresponse(res, 404, err);
+      }else{
+        sendJSONresponse(res, 201, body);
+      } 
+    });
+  }else{
+    sendJSONresponse(res, 404, {
+      "message" : "No video in request to save"
+    });
+  }
+}

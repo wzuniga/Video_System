@@ -41,3 +41,23 @@ module.exports.userById = function(req, res){
     });
   }
 };
+
+module.exports.addUser = function(req, res){
+  if(req.body){
+    Us.create({
+      name: req.body.name,
+      email: req.body.email,
+      password: req.body.password,
+    }, function(err, body)
+      if(err){
+        sendJSONresponse(res, 404, err);
+      }else{
+        sendJSONresponse(res, 201, body);
+      } 
+    });
+  }else{
+    sendJSONresponse(res, 404, {
+      "message" : "No video in request to save"
+    });
+  }
+}
