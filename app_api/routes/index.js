@@ -18,5 +18,6 @@ router.post('/videos', ctrlVideos.addVideo);
 
 router.get('/users', ctrlUsers.userList);
 router.get('/users/:userid', ctrlUsers.userById);
+router.post('users', ctrlUsers.addUser);
 
 module.exports = router;

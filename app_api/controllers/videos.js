@@ -55,7 +55,7 @@ module.exports.addVideo = function(req, res){
       if(err){
         sendJSONresponse(res, 404, err);
       }else{
-        sendJSONresponse(res, 200, body);
+        sendJSONresponse(res, 201, body);
       } 
     });
   }else{
