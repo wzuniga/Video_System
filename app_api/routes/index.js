@@ -10,6 +10,7 @@ var ctrlUsers = require('../controllers/users');
 
 router.get('/videos', ctrlVideos.videoList);
 router.get('/videos/:videoid', ctrlVideos.videoById);
+router.post('/videos', ctrlVideos.addVideo);
 
 /*
 * Hook users
