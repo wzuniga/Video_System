@@ -48,7 +48,7 @@ module.exports.addUser = function(req, res){
       name: req.body.name,
       email: req.body.email,
       password: req.body.password,
-    }, function(err, body)
+    }, function(err, body){
       if(err){
         sendJSONresponse(res, 404, err);
       }else{

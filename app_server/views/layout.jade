@@ -5,6 +5,8 @@ html
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     link(rel='stylesheet', href='/bootstrap/css/bootstrap.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
+    script(src='https://apis.google.com/js/platform.js', async='', defer='')
+    meta(name='google-signin-client_id', content='848117322758-739rkse5pgvn4gd6qtcs28pc56igtp0t.apps.googleusercontent.com')
   body
     nav.navbar.navbar-findcond.navbar-fixed-top
       .container
@@ -19,9 +21,9 @@ html
         #navbar.navbar-collapse.collapse
           ul.nav.navbar-nav.navbar-right
             li
-              a(href='#') Login
+              a(href='/login') Login
             li
-              a(href='#') Register
+              a(href='/register') Register
             li.dropdown.user
               a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-expanded='false')
                 | Admin 
