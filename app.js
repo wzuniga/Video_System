@@ -12,8 +12,7 @@ var users = require('./app_server/routes/users');
 
 var app = express();
 
-//var http = require('http').Server(app);
-var server = app.listen(3001);
+var server = app.listen(process.env.PORT || 3000);
 var io = require('socket.io').listen(server);
 var port = process.env.PORT || 3000;
 var messages = [];
@@ -72,13 +71,11 @@ io.on('connection', function(socket){
   io.sockets.emit('messages', messages);
   
   socket.on('stream', function(image){
-    //console.log(i++);
     io.sockets.emit('stream',image);
   });
 
   socket.on('new-message', function(data) {
     messages.push(data);
-
     io.sockets.emit('messages', messages);
   });
 });
