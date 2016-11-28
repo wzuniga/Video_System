@@ -18,9 +18,14 @@ var userSchema = new mongoose.Schema({
 	createdOn: Date
 });
 
+var userPublicSchema = new mongoose.Schema({
+	name: String,
+	photo: String
+});
+
 var commentSchema = new mongoose.Schema({
 	user: {
-		type: userSchema,
+		type: userPublicSchema,
 		required: true
 	},
 	comment: String,
@@ -39,8 +44,8 @@ var videoSchema = new mongoose.Schema({
         type: Date,
         "default": Date.now
     },
-    user: mongoose.Schema.Types.ObjectId,
-    category: mongoose.Schema.Types.ObjectId,
+    user: userPublicSchema,
+    category: categorySchema,
     comments: [commentSchema]
 });
 

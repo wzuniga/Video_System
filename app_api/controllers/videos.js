@@ -6,6 +6,9 @@ var sendJSONresponse = function(res, status, content) {
   res.json(content);
 };
 
+/*
+*Get All videos
+*/
 module.exports.videoList = function (req, res) {
   Vid
     .find()
@@ -21,7 +24,11 @@ module.exports.videoList = function (req, res) {
     });
 };
 
+/*
+* Get a video by ID
+*/
 module.exports.videoById = function (req, res) {
+  console.log('Finding videos details: ' + req.params);
   if(req.params && req.params.videoid){
     Vid
     .findById(req.params.videoid)
@@ -51,6 +58,7 @@ module.exports.addVideo = function(req, res){
       name: req.body.name,
       description: req.body.description,
       user: req.body.user,
+      category: req.body.category
     }, function(err, body){
       if(err){
         sendJSONresponse(res, 404, err);
@@ -61,6 +69,74 @@ module.exports.addVideo = function(req, res){
   }else{
     sendJSONresponse(res, 404, {
       "message" : "No video in request to save"
+    });
+  }
+}
+
+/*
+* Update a Video
+*/
+module.exports.updateVideo = function(req, res){
+  if (!req.params.videoid) {
+    sendJSONresponse(res, 404, {
+      "message": "Not found, videoid is required"
+    });
+    return;
+  }
+  Vid
+    .findById(req.params.videoid)
+    .select('-comments')
+    .exec(
+      function(err, video) {
+        if (!video) {
+          sendJSONresponse(res, 404, {
+            "message": "videoid not found"
+          });
+          return;
+        } else if (err) {
+          sendJSONresponse(res, 400, err);
+          return;
+        }
+
+        video.name = req.body.name;
+        video.description = req.body.description;
+        video.category = {
+          name: req.body.category.name,
+          description: req.body.category.description
+        };
+        video.save(function(err, video) {
+          if (err) {
+            sendJSONresponse(res, 404, err);
+          } else {
+            sendJSONresponse(res, 200, video);
+          }
+        });
+      }
+    );
+}
+
+/*
+* Delete Video by ID
+*/
+module.exports.deleteVideo = function(req, res){
+  var videoid = req.params.videoid;
+  if (videoid) {
+    Vid
+      .findByIdAndRemove(videoid)
+      .exec(
+        function(err, video) {
+          if (err) {
+            console.log(err);
+            sendJSONresponse(res, 404, err);
+            return;
+          }
+          console.log("video id " + videoid + " deleted");
+          sendJSONresponse(res, 204, null);
+        }
+    );
+  } else {
+    sendJSONresponse(res, 404, {
+      "message": "No videoid"
     });
   }
 }
