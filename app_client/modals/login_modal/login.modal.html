@@ -1,0 +1,26 @@
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<meta name="google-signin-client_id" content="848117322758-739rkse5pgvn4gd6qtcs28pc56igtp0t.apps.googleusercontent.com">
+
+<form id="contact" action="" method="post">
+   <h3>Login</h3>
+   <fieldset>
+      <input placeholder="Usuario" type="text" tabindex="1" required="" autofocus=""/>
+   </fieldset>
+   <fieldset>
+      <input placeholder="Contraseña" type="password" tabindex="2" required=""/>
+   </fieldset>
+   <fieldset>
+      <button id="contact-submit" name="submit" type="submit" data-submit="..Enviando">Login</button>
+   </fieldset>
+   <h4>Ingrese por Gmail</h4>
+   <div data-onsuccess="onSignIn" class="g-signin2"></div>
+   <script type="text/javascript">
+      function onSignIn(googleUser) {
+         var profile = googleUser.getBasicProfile();
+         console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+         console.log('Name: ' + profile.getName());
+         console.log('Image URL: ' + profile.getImageUrl());
+         console.log('Email: ' + profile.getEmail());
+      }
+   </script>
+</form>

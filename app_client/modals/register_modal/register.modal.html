@@ -1,0 +1,18 @@
+<form ng-submit="vm.onSubmit()" id="contact">
+   <h3>Registrate</h3>
+   <fieldset>
+      <input ng-model="vm.formData.name" placeholder="Nombre" type="text" tabindex="1" required="" autofocus=""/>
+   </fieldset>
+   <fieldset>
+      <input ng-model="vm.formData.email" placeholder="Email" type="email" tabindex="2" required=""/>
+   </fieldset>
+   <fieldset>
+      <input ng-model="vm.formData.pass" placeholder="Contraseña" type="password" tabindex="2" required=""/>
+   </fieldset>
+   <fieldset>
+      <input ng-model="vm.formData.pass2" placeholder="Confirmar contraseña" type="password" tabindex="2" required=""/>
+   </fieldset>
+   <fieldset>
+      <button id="contact-submit" name="submit" type="submit" data-submit="..Enviando">Register</button>
+   </fieldset>
+</form>

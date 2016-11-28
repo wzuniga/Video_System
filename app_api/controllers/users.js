@@ -43,6 +43,7 @@ module.exports.userById = function(req, res){
 };
 
 module.exports.addUser = function(req, res){
+   console.log("putos");
   if(req.body){
     Us.create({
       name: req.body.name,
