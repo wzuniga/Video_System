@@ -1,0 +1,23 @@
+extends layout
+
+block content
+  .container
+  form#contact(action='', method='post')
+    h3 Login
+    fieldset
+      input(placeholder='Usuario', type='text', tabindex='1', required='', autofocus='')
+    fieldset
+      input(placeholder='Contraseña', type='password', tabindex='2', required='')
+    fieldset
+      button#contact-submit(name='submit', type='submit', data-submit='..Enviando') Login
+    h4 Ingrese por Gmail
+    .g-signin2(data-onsuccess='onSignIn')
+    script(type='text/javascript').
+      function onSignIn(googleUser) {
+        var profile = googleUser.getBasicProfile();
+        console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+        console.log('Name: ' + profile.getName());
+        console.log('Image URL: ' + profile.getImageUrl());
+        console.log('Email: ' + profile.getEmail());
+      }
+
