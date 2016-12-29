@@ -1,22 +1,5 @@
 var mongoose = require('mongoose');
 
-var userSchema = new mongoose.Schema({
-	name: {
-		type: String,
-		required: true
-	},
-	email:{
-		type: String,
-		required: true
-	},
-	password:{
-		type: String,
-		required: true
-	},
-	token: String,
-	photo: String,
-	createdOn: Date
-});
 
 var userPublicSchema = new mongoose.Schema({
 	name: String,
@@ -49,7 +32,7 @@ var videoSchema = new mongoose.Schema({
     comments: [commentSchema]
 });
 
-mongoose.model('User', userSchema);
+
 mongoose.model('Comment', commentSchema);
 mongoose.model('Category', categorySchema);
 mongoose.model('Video', videoSchema);

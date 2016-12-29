@@ -19,6 +19,11 @@
     "morgan": "~1.7.0",
     "request": "^2.75.0",
     "serve-favicon": "~2.3.0",
-    "socket.io": "^1.4.8"
+    "socket.io": "^1.4.8",
+    "jsonwebtoken": "~7.1.10",
+    "passport": "~0.3.2",
+    "passport-local": "~1.0.0",
+    "dotenv": "~2.0.0",
+    "express-jwt": "~5.1.0"
   }
 }

@@ -1,13 +1,16 @@
+
+<page-header content="vm.pageHeader"></page-header>
 <form ng-submit="vm.onSubmit()" id="contact">
    <h3>Registrate</h3>
+   <div role="alert" ng-show="vm.formError" class="alert alert-danger">{{ vm.formError }}</div>
    <fieldset>
-      <input ng-model="vm.formData.name" placeholder="Nombre" type="text" tabindex="1" required="" autofocus=""/>
+      <input ng-model="vm.credentials.name" placeholder="Nombre" type="text" tabindex="1" required="" autofocus=""/>
    </fieldset>
    <fieldset>
-      <input ng-model="vm.formData.email" placeholder="Email" type="email" tabindex="2" required=""/>
+      <input ng-model="vm.credentials.email" placeholder="Email" type="email" tabindex="2" required=""/>
    </fieldset>
    <fieldset>
-      <input ng-model="vm.formData.pass" placeholder="Contraseña" type="password" tabindex="2" required=""/>
+      <input ng-model="vm.credentials.password" placeholder="Contraseña" type="password" tabindex="2" required=""/>
    </fieldset>
    <fieldset>
       <input ng-model="vm.formData.pass2" placeholder="Confirmar contraseña" type="password" tabindex="2" required=""/>
