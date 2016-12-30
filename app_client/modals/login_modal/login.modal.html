@@ -1,13 +1,14 @@
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 <meta name="google-signin-client_id" content="848117322758-739rkse5pgvn4gd6qtcs28pc56igtp0t.apps.googleusercontent.com">
 
-<form id="contact" action="" method="post">
+<form ng-submit="vm.onSubmit()" id="contact" >
    <h3>Login</h3>
+    <div role="alert" ng-show="vm.formError" class="alert alert-danger">{{ vm.formError }}</div>
    <fieldset>
-      <input placeholder="Usuario" type="text" tabindex="1" required="" autofocus=""/>
+      <input ng-model="vm.credentials.email" placeholder="Usuario" type="text" tabindex="1" required="" autofocus=""/>
    </fieldset>
    <fieldset>
-      <input placeholder="Contraseña" type="password" tabindex="2" required=""/>
+      <input  ng-model="vm.credentials.password" placeholder="Contraseña" type="password" tabindex="2" required=""/>
    </fieldset>
    <fieldset>
       <button id="contact-submit" name="submit" type="submit" data-submit="..Enviando">Login</button>

@@ -2,9 +2,23 @@
    angular
       .module('videx')
       .controller('registerController', registerController);
-      
-   function registerController($uibModalInstance, videxData){
+   
+   registerController.$inject = ['$location','authentication'];
+   function registerController($uibModalInstance, authentication){
       var vm = this;
+
+      vm.pageHeader = {
+         title: 'register'
+      };
+
+      vm.credentials = {
+         name : "",
+         email : "",
+         password : ""
+      };
+
+      //vm.returnPage = $location.search().page || '/';
+
       vm.modal = { 
          cancel: function(){
             $uibModalInstance.dismiss('cancel');
@@ -13,24 +27,32 @@
             $uibModalInstance.close(result);
          }   
       };
-
-      vm.onSubmit = function(){
-         console.log(vm.formData);
-         videxData.addUser({
-            name: vm.formData.name,
-            email: vm.formData.email,
-            password: vm.formData.pass
-            })
-         .success(function(data){
-            vm.modal.close(data);
-            console.log("SUccess");
-          })
-         .error(function(data){
-            console.log("Error puto.");
-         });
-         
-         return false;
+      vm.onSubmit = function () {
+         vm.formError = "";
+         if (!vm.credentials.name || !vm.credentials.email || !vm.credentials.password) {
+            vm.formError = "All fields required, please try again";
+            return false;
+         } else {
+            vm.doRegister();
+         }
       };
+
+      vm.doRegister = function() {
+         vm.formError = "";
+         authentication
+            .register(vm.credentials)
+            .success(function(data){
+               vm.modal.close(data);
+            })
+            .error(function(err){
+               vm.formError = err;
+            })
+            .then(function(){
+               $location.search('page', null); 
+               $location.path(vm.returnPage);
+            });
+      };
+     
    }
 })();
 
