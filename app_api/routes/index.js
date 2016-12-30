@@ -16,17 +16,17 @@ var ctrlAuth = require('../controllers/authentication');
 
 router.get('/videos', ctrlVideos.videoList);
 router.get('/videos/:videoid', ctrlVideos.videoById);
-router.post('/videos', ctrlVideos.addVideo);
-router.put('/videos/:videoid', ctrlVideos.updateVideo);
-router.delete('/videos/:videoid', ctrlVideos.deleteVideo);
+router.post('/videos', auth, ctrlVideos.addVideo);
+router.put('/videos/:videoid', auth,ctrlVideos.updateVideo);
+router.delete('/videos/:videoid', auth, ctrlVideos.deleteVideo);
 
 /*
 *Hook Comments
 */
 router.get('/videos/:videoid/comments', ctrlComments.commentList);
-router.post('/videos/:videoid/comments', ctrlComments.addComment);
-router.put('/videos/:videoid/comments/:commentid', ctrlComments.updateComment);
-router.delete('videos/:videoid/comments/:commentid', ctrlComments.deleteComment);
+router.post('/videos/:videoid/comments', auth, ctrlComments.addComment);
+router.put('/videos/:videoid/comments/:commentid', auth, ctrlComments.updateComment);
+router.delete('videos/:videoid/comments/:commentid', auth, ctrlComments.deleteComment);
 
 /*
 * auth
