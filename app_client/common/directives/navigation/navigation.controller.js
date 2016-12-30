@@ -34,5 +34,8 @@
        });
     }; 
 
+    vm.emitirStreaming = function(){
+      
+    }
   }
 })();

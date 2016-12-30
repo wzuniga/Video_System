@@ -1,6 +1,19 @@
 <navigation></navigation>
 <div class="container">
-   <h2>Video con id: {{vm.pageHeader.title}}</h2>
    <div class="row">
-   </div>
+      <div class="col-sm-8">
+        <img id="play" src="" alt="" height="500">
+      </div>
+      <div class="col-sm-4">
+        <h3><span class="label label-default">Chat</span></h3>
+        <div id="messages">
+        </div>
+
+        <form>
+          <input type="text" ng-model="vm.texto" class="form-control" placeholder="Cuéntanos algo..."><br/>
+          <button ng-click="vm.sendMessage()" class="btn btn-info">Enviar</button>
+        </form>
+      </div>
+    </div>
+    
 </div>

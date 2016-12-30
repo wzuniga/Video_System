@@ -14,6 +14,8 @@
          <!--<li ng-show="navvm.isLoggedIn" class="dropdown">-->
 
          <li  ng-hide="navvm.isLoggedIn" ><a href="#" ng-click='navvm.popupRegisterForm()'>Register</a></li>
+         <li><a href="/emitir" ng-click='navvm.emitirStreaming()'>Emitir</a></li>
+
          <li class="dropdown user"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="dropdown-toggle">
          {{navvm.currentUser.name}}<span class="caret"></span></a>
            <ul role="menu" class="dropdown-menu">
