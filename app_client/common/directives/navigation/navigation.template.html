@@ -11,9 +11,9 @@
      <div id="navbar" class="navbar-collapse collapse">
        <ul class="nav navbar-nav navbar-right">
          <li ng-hide="navvm.isLoggedIn"><a  ng-click='navvm.popupLoginForm()' >Login</a></li>
-         <li ng-show="navvm.isLoggedIn" class="dropdown">
+         <!--<li ng-show="navvm.isLoggedIn" class="dropdown">-->
 
-         <li><a href="#" ng-click='navvm.popupRegisterForm()'>Register</a></li>
+         <li  ng-hide="navvm.isLoggedIn" ><a href="#" ng-click='navvm.popupRegisterForm()'>Register</a></li>
          <li class="dropdown user"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="dropdown-toggle">
          {{navvm.currentUser.name}}<span class="caret"></span></a>
            <ul role="menu" class="dropdown-menu">
