@@ -3,8 +3,8 @@
       .module('videx')
       .controller('loginController', loginController);
    
-   loginCtroller.$inject = ['$location','authentication'];
-   function loginController($uibModalInstance, authentication){
+   loginController.$inject = ['$location','$uibModalInstance', '$uibModal','authentication'];
+   function loginController( $location, $uibModalInstance, $uibModal, authentication){
       var vm = this;
 
       vm.pageHeader = {
@@ -23,6 +23,15 @@
             $uibModalInstance.close(result);
          }
       };
+      vm.popupRegisterForm = function(){
+         vm.modal.close();
+         var modalInstance = $uibModal.open({
+             templateUrl: '/modals/register_modal/register.modal.html',
+             controller: 'registerController as vm'
+         });
+      }; 
+      
+      vm.returnPage = $location.search().page || '/';
 
       vm.onSubmit = function () {
          vm.formError = "";
@@ -45,10 +54,10 @@
             .error(function(err){
                vm.formError = err;
             })
-        .then(function(){
-            $location.search('page', null); 
-            $location.path(vm.returnPage);
-        });
+            .then(function(){
+               $location.search('page', null); 
+               $location.path(vm.returnPage);
+            });
       }; 
    }
 })();

@@ -10,7 +10,9 @@
      </div>
      <div id="navbar" class="navbar-collapse collapse">
        <ul class="nav navbar-nav navbar-right">
-         <li><a href="#" ng-click='navvm.popupLoginForm()'>Login</a></li>
+         <li ng-hide="navvm.isLoggedIn"><a  ng-click='navvm.popupLoginForm()' >Login</a></li>
+         <li ng-show="navvm.isLoggedIn" class="dropdown">
+
          <li><a href="#" ng-click='navvm.popupRegisterForm()'>Register</a></li>
          <li><a href="#" ng-click='navvm.emitirStreaming()'>Emitir</a></li>
          <li class="dropdown user"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="dropdown-toggle">
@@ -18,7 +20,7 @@
            <ul role="menu" class="dropdown-menu">
              <li><a href="#">Settings</a></li>
              <li class="divider"></li>
-             <li><a href="#exit">Logout</a></li>
+             <li><a href="" ng-click="navvm.logout()">Logout</a></li>
            </ul>
          </li>
        </ul>
