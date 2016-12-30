@@ -33,5 +33,11 @@
        });
     }; 
 
+    vm.emitirStreaming = function(){
+      var modalInstance = $uibModal.open({
+          templateUrl: '/emitir/emitir.view.html',
+          controller: 'emitirController as vm'
+       });
+    }
   }
 })();
