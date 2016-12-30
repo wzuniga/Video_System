@@ -1,6 +1,5 @@
 var mongoose = require('mongoose');
 
-
 var userPublicSchema = new mongoose.Schema({
   name: String,
   photo: String
