@@ -2,6 +2,7 @@
   angular
   .module('videx')
   .directive('navigation', navigation);
+  
   function navigation () {
     return {
       restrict: 'EA',

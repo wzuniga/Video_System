@@ -3,7 +3,7 @@
       .module('videx')
       .controller('registerController', registerController);
    
-   registerController.$inject = ['$location','authentication'];
+   //registerController.$inject = ['$location','authentication'];
    function registerController($uibModalInstance, authentication){
       var vm = this;
 
