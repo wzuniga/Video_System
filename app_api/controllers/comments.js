@@ -1,9 +1,35 @@
 var mongoose = require('mongoose');
 var Videos = mongoose.model('Video');
+var User = mongoose.model('User');
 
 var sendJSONresponse = function(res, status, content) {
   res.status(status);
   res.json(content);
+};
+
+var getAuthor = function(req, res, callback){
+  if(req.payload && req.payload.email){
+    User
+    .findOne({email: req.payload.email})
+    .exec(function(err, user){
+      if(!user){
+        sendJSONresponse(res, 404, {
+          "message": "User not found"
+        });
+        return;
+      }else if(err){
+        console.log(err);
+        sendJSONresponse(res, 404, err);
+        return;
+      }
+      callback(req, res, user);
+    });
+  } else{
+    sendJSONresponse(res, 404, {
+      "message": "User not found"
+    });
+    return;
+  }
 };
 
 /*
@@ -39,24 +65,26 @@ module.exports.commentList = function(req, res){
 *Add a comment to a video
 */
 module.exports.addComment = function(req, res){
-  if (req.params && req.params.videoid) {
-    Videos
-      .findById(req.params.videoid)
-      .select('comments')
-      .exec(
-        function(err, video) {
-          if (err) {
-            sendJSONresponse(res, 400, err);
-          } else {
-            doAddComment(req, res, video);
+  getAuthor(req, res, function(req, res, user){
+    if (req.params && req.params.videoid) {
+      Videos
+        .findById(req.params.videoid)
+        .select('comments')
+        .exec(
+          function(err, video) {
+            if (err) {
+              sendJSONresponse(res, 400, err);
+            } else {
+              doAddComment(req, res, video, user);
+            }
           }
-        }
-    );
-  } else {
-    sendJSONresponse(res, 404, {
-      "message": "Not found, videoid required"
-    });
-  }
+      );
+    } else {
+      sendJSONresponse(res, 404, {
+        "message": "Not found, videoid required"
+      });
+    }
+  });
 };
 
 /*
@@ -158,15 +186,12 @@ module.exports.deleteComment = function(req, res){
   );
 }
 
-var doAddComment = function(req, res, video) {
+var doAddComment = function(req, res, video, author) {
   if (!video) {
     sendJSONresponse(res, 404, "videoid not found");
   } else {
     video.comments.push({
-      user: {
-        name: req.body.user.name,
-        photo: req.body.user.photo
-      },
+      user: author,
       comment: req.body.comment
     });
     video.save(function(err, video) {
