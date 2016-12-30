@@ -3,8 +3,8 @@
       .module('videx')
       .controller('loginController', loginController);
    
-   loginController.$inject = ['$location','$uibModalInstance', '$uibModal','authentication'];
-   function loginController( $location, $uibModalInstance, $uibModal, authentication){
+   loginController.$inject = ['$route','$location','$uibModalInstance', '$uibModal','authentication'];
+   function loginController( $route ,$location, $uibModalInstance, $uibModal, authentication){
       var vm = this;
 
       vm.pageHeader = {
@@ -32,7 +32,7 @@
       }; 
       
       vm.returnPage = $location.search().page || '/';
-
+      
       vm.onSubmit = function () {
          vm.formError = "";
             if (!vm.credentials.email || !vm.credentials.password) {
@@ -50,13 +50,14 @@
             .login(vm.credentials)
             .success(function(data){
                vm.modal.close(data);
+               $route.reload();
             })
             .error(function(err){
                vm.formError = err;
             })
             .then(function(){
                $location.search('page', null); 
-               $location.path(vm.returnPage);
+               $location.path("/");
             });
       }; 
    }
