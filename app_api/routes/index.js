@@ -7,6 +7,7 @@ var auth = jwt({
 });
 
 var ctrlVideos = require('../controllers/videos');
+var ctrlUsers = require('../controllers/users');
 var ctrlComments = require('../controllers/comments');
 var ctrlAuth = require('../controllers/authentication');
 
@@ -28,6 +29,9 @@ router.post('/videos/:videoid/comments', auth, ctrlComments.addComment);
 router.put('/videos/:videoid/comments/:commentid', auth, ctrlComments.updateComment);
 router.delete('videos/:videoid/comments/:commentid', auth, ctrlComments.deleteComment);
 
+router.get('/users', ctrlUsers.userList);
+router.get('/users/:userid', ctrlUsers.userById);
+router.post('/users', ctrlUsers.addUser);
 /*
 * auth
 */

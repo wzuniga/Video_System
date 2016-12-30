@@ -1,26 +1,44 @@
-<script src="https://apis.google.com/js/platform.js" async defer></script>
-<meta name="google-signin-client_id" content="848117322758-739rkse5pgvn4gd6qtcs28pc56igtp0t.apps.googleusercontent.com">
+<!--<head>
+   <meta name="google-signin-scope" content="profile email">
+   <meta name="google-signin-client_id" content="315896246337-qti2ug8i8f7i8mu3inu01f7ftot7iaf3.apps.googleusercontent.com">
+   <script src="https://apis.google.com/js/platform.js" async defer></script>
+</head>
+-->
+<head>
+   <meta name="google-signin-scope" content="profile email">
+   <meta name="google-signin-client_id" content="848117322758-739rkse5pgvn4gd6qtcs28pc56igtp0t.apps.googleusercontent.com">
+   <script src="https://apis.google.com/js/platform.js" async defer></script>
 
-<form id="contact" action="" method="post">
+</head>
+<form ng-submit="vm.onSubmit()" id="contact" >
    <h3>Login</h3>
+    <div role="alert" ng-show="vm.formError" class="alert alert-danger">{{ vm.formError }}</div>
    <fieldset>
-      <input placeholder="Usuario" type="text" tabindex="1" required="" autofocus=""/>
+      <input ng-model="vm.credentials.email" placeholder="Usuario" type="text" tabindex="1" required="" autofocus=""/>
    </fieldset>
    <fieldset>
-      <input placeholder="Contraseña" type="password" tabindex="2" required=""/>
+      <input  ng-model="vm.credentials.password" placeholder="Contraseña" type="password" tabindex="2" required=""/>
    </fieldset>
    <fieldset>
       <button id="contact-submit" name="submit" type="submit" data-submit="..Enviando">Login</button>
    </fieldset>
+   <p class="lead">Not a member? Please <a ng-click='vm.popupRegisterForm()' >register</a> first.</p>
+
    <h4>Ingrese por Gmail</h4>
-   <div data-onsuccess="onSignIn" class="g-signin2"></div>
-   <script type="text/javascript">
+  
+   <div class="g-signin"  data-onsuccess="onSignIn" ></div>
+
+   <script>
+
       function onSignIn(googleUser) {
          var profile = googleUser.getBasicProfile();
          console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
          console.log('Name: ' + profile.getName());
          console.log('Image URL: ' + profile.getImageUrl());
          console.log('Email: ' + profile.getEmail());
+
+         var LoR = response.getAuthResponse().id_token;
+            console.log("~ le Tolkien: " + LoR);
       }
    </script>
 </form>

@@ -48,7 +48,7 @@ module.exports.commentList = function(req, res){
         sendJSONresponse(res, 404, err);
         return;
       }
-      if(!video.comments){
+      if(video.comments){
         sendJSONresponse(res, 200, video.comments);
       }else{
         sendJSONresponse(res, 404, {"message": "No comments found for this video."});

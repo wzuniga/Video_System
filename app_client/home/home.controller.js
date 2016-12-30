@@ -6,7 +6,7 @@
    function homeController(videxData, $uibModal){
       var vm = this;
       vm.pageHeader = {
-         title: 'Videx mola'
+         title: 'Videx'
       };
 
       videxData.getVideos()
