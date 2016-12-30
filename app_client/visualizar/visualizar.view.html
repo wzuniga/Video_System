@@ -2,5 +2,39 @@
 <div class="container">
    <h2>Video con id: {{vm.pageHeader.title}}</h2>
    <div class="row">
-   </div>
+      <div class="col-sm-8">
+        <img id="play" src="" alt="" height="500">
+      </div>
+      <div class="col-sm-4">
+        <h3><span class="label label-default">Chat</span></h3>
+        <div id="messages">
+        </div>
+<button ng-click="sendMessage()">gg</button>
+        <form onsubmit="return addMessage(this)">
+          <input type="text" id="username" class="form-control" placeholder="Tu Nombre" ><br/>
+          <input type="text" id="texto" class="form-control" placeholder="Cuéntanos algo..."><br/>
+          <input type="submit" class="btn btn-info" value="Enviar">
+        </form>
+      </div>
+    </div>
+    
 </div>
+<script>
+        //message
+
+    function addMessage(e) {
+      var atr = document.getElementById('username').value;
+      var txt = document.getElementById('texto').value;
+
+      if (atr == '' || txt == '' ) return false;
+
+      var message = {
+        author: atr,
+        text: txt
+      };
+      document.getElementById("username").value="";
+      document.getElementById("texto").value="";
+      socket.emit('new-message', message);
+      return false;
+    }
+        </script>
