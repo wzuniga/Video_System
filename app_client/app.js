@@ -7,6 +7,16 @@
             controller: 'homeController',
             controllerAs: 'vm'
          })
+         .when('/emitir', {
+            templateUrl: 'emitir/emitir.view.html',
+            controller: 'emitirController',
+            controllerAs: 'vm'
+         })
+         .when('/visualizar/:videoid', {
+            templateUrl: 'visualizar/visualizar.view.html',
+            controller: 'visualizarController',
+            controllerAs: 'vm'
+         })
          .otherwise({redirectTo: '/'});
       $locationProvider.html5Mode(true);
    }
