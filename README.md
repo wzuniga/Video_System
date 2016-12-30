@@ -1,4 +1,4 @@
-#Sistema de Video
+# Sistema de Video
 Sistema de video implementado con MEAN.
 
 Es necesario tener instalado
