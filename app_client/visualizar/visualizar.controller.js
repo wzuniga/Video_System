@@ -3,8 +3,7 @@
   .module('videx')
   .controller('visualizarController', visualizarController);
 
-  visualizarController.$inject = ['$routeParams'];
-  function visualizarController($routeParams){
+  function visualizarController($routeParams, videxData){
     var vm = this;
 
     vm.videoid = $routeParams.videoid;
@@ -28,24 +27,37 @@
     function render (data) {
       var html = data.map(function(elem, index) {
         return(`<div class="well well-sm">
-          <strong>${elem.author}</strong>:
           <em>${elem.text}</em>
           </div>`);
         }).join(" ");
 
       document.getElementById('messages').innerHTML = html;
     }
+    
 
     vm.sendMessage = function(){
       var atr = vm.username;
       var txt = vm.texto;
 
-      if (atr == '' || txt == '' ) return false;
+      if (txt == '' ) return false;
 
       var message = {
         author: atr,
         text: txt
       };
+      var messgeToApi = {
+        id: vm.videoid,
+        comment: txt
+      };
+
+      videxData.addComment(messgeToApi)
+      .success(function(data){
+        console.log(data);
+      });
+
+
+
+
       vm.username="";
       vm.texto="";
       socket.emit('new-message', message);

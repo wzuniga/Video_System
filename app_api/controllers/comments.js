@@ -196,6 +196,7 @@ var doAddComment = function(req, res, video, author) {
     });
     video.save(function(err, video) {
       var thisComment;
+      console.log(video);
       if (err) {
         sendJSONresponse(res, 400, err);
       } else {
