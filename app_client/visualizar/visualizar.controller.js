@@ -11,7 +11,6 @@
     vm.pageHeader = {
        title: vm.videoid
     };
-    alert(vm.videoid);
 
     var socket = io();
     var i = 0;
@@ -20,8 +19,37 @@
       img.src = image;
     });
 
+    //message
+    socket.on('messages', function(data) {
+      console.log(data);
+      render(data);
+    })
+
+    function render (data) {
+      var html = data.map(function(elem, index) {
+        return(`<div class="well well-sm">
+          <strong>${elem.author}</strong>:
+          <em>${elem.text}</em>
+          </div>`);
+        }).join(" ");
+
+      document.getElementById('messages').innerHTML = html;
+    }
+
     vm.sendMessage = function(){
-      alert("ok");
+      var atr = vm.username;
+      var txt = vm.texto;
+
+      if (atr == '' || txt == '' ) return false;
+
+      var message = {
+        author: atr,
+        text: txt
+      };
+      vm.username="";
+      vm.texto="";
+      socket.emit('new-message', message);
+      return false;
     }
     
   }
